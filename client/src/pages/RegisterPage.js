@@ -17,17 +17,19 @@ export default function RegisterPage() {
     }
   }
   return (
-    <form className="register" onSubmit={register}>
-      <h1>Register</h1>
-      <input type="text"
-             placeholder="username"
-             value={username}
-             onChange={ev => setUsername(ev.target.value)}/>
-      <input type="password"
-             placeholder="password"
-             value={password}
-             onChange={ev => setPassword(ev.target.value)}/>
-      <button>Register</button>
-    </form>
+    <div className="RegisterPage-form-wrap">
+      <form className="register RegisterPage-form" onSubmit={register}>
+        <h1>Đăng ký</h1>
+        <input type="text"
+               placeholder="Tên tài khoản"
+               value={username}
+               onChange={ev => setUsername(ev.target.value)}/>
+        <input type="password"
+               placeholder="Mật khẩu"
+               value={password}
+               onChange={ev => setPassword(ev.target.value)}/>
+        <button>Đăng ký</button>
+      </form>
+    </div>
   );
 }

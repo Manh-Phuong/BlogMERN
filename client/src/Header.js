@@ -30,14 +30,14 @@ export default function Header() {
       <nav>
         {username && (
           <>
-            <div className="Header-create"><Link to="/create">Create new post</Link></div>
-            <div className="Header-logout"> <a onClick={logout}><span className="Header-logout-label">Logout</span> ({username})</a></div>
+            <div className="Header-create"><Link to="/create">Tạo bài mới</Link></div>
+            <div className="Header-logout"> <a onClick={logout}><span className="Header-logout-label">Đăng xuất</span> ({username})</a></div>
           </>
         )}
         {!username && (
           <>
-            <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            <Link to="/login" className="Header-Login">Đăng nhập</Link>
+            <Link to="/register" className="Header-Register">Đăng ký</Link>
           </>
         )}
       </nav>

@@ -163,21 +163,21 @@ export default function LoginPage() {
     return <Navigate to={'/'} />
   }
   return (
-    <>
-      <form className="login" onSubmit={login}>
-        <h1>Login</h1>
+    <div className="LoginPage-form-wrap">
+      <form className="login LoginPage-form" onSubmit={login}>
+        <h1>Đăng nhập</h1>
         <input type="text"
-               placeholder="username"
+               placeholder="Tên tài khoản"
                value={username}
                onChange={ev => setUsername(ev.target.value)}/>
         <input type="password"
-               placeholder="password"
+               placeholder="Mật khẩu"
                value={password}
                onChange={ev => setPassword(ev.target.value)}/>
-        <button>Login</button>
+        <button>Đăng nhập</button>
       </form>
-      <p className="loginPage-OR">OR</p>
+      <p className="loginPage-OR">Hoặc</p>
       <div id='signInDiv'></div>
-    </>
+    </div>
   );
 }

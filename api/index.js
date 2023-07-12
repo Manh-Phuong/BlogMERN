@@ -101,32 +101,41 @@ app.get('/profile', (req,res) => {
   });
 });
 
-app.post('/logout', (req,res) => {
-  res.cookie('token', '').json('ok');
+// app.post('/logout', (req,res) => {
+//   res.cookie('token', '').json('ok');
+// });
+
+app.post('/logout', (req, res) => {
+  // Xóa cookie 'token'
+  res.cookie('token', '');
+
+  // Đặt lại giá trị userInfo thành null hoặc giá trị mặc định tương ứng
+  req.session.userInfo = null; // Hoặc req.session.userInfo = { id: null, name: null, ... } tuỳ theo cấu trúc userInfo
+
+  res.json('ok');
 });
 
-/*app.post('/post', uploadMiddleware.single('file'), async (req,res) => {
-  const {originalname,path} = req.file;
-  const parts = originalname.split('.');
-  const ext = parts[parts.length - 1];
-  const newPath = path+'.'+ext;
-  fs.renameSync(path, newPath);
 
-  const {token} = req.cookies;
-  jwt.verify(token, secret, {}, async (err,info) => {
-    if (err) throw err;
-    const {title,summary,content} = req.body;
-    const postDoc = await Post.create({
-      title,
-      summary,
-      content,
-      cover:newPath,
-      author:info.id,
-    });
-    res.json(postDoc);
-  });
 
-});*/
+
+app.delete('/deletecomment', async (req, res) => {
+  const { idCmt } = req.body;
+
+  try {
+    // Xóa comment theo ID
+    const comment = await Comment.findByIdAndDelete(idCmt);
+    console.log(comment)
+    console.log(idCmt)
+    if (!comment) {
+      return res.status(404).send('Không tìm thấy comment');
+    }
+
+    res.status(200).send('Comment đã được xóa thành công');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Lỗi xóa comment');
+  }
+});
 
 
 app.post('/comment/:id_post', async (req, res) => {
@@ -151,20 +160,7 @@ app.get('/postcomments/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const post = await Post.findById(id).populate({
-      path: 'comments',
-      populate: { path: 'author', select: 'username' }
-    }).populate('author', ['username']);
-
-    if (!post) {
-      return res.status(404).json({ error: 'Post not found' });
-    }
-
-    const comments = post.comments.map(comment => ({
-      content: comment.content,
-      author: comment.author.username
-    }));
-    console.log(comments)
+    const comments = await Comment.find({ post: id }).populate('author', 'username').exec();
 
     res.json(comments);
   } catch (error) {
@@ -172,25 +168,6 @@ app.get('/postcomments/:id', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
-
-
-
-// app.get('/post/:id/comments', async (req, res) => {
-//   const { id } = req.params;
-
-//   try {
-//     const post = await Post.findById(id).populate('author', ['username']).populate('comments', ['content', 'author']);
-
-//     if (!post) {
-//       return res.status(404).json({ error: 'Post not found' });
-//     }
-
-//     res.json(post.comments);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Server error' });
-//   }
-// });
 
 
 app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
@@ -228,42 +205,6 @@ app.get('/uploads/:filename', (req, res) => {
   const filePath = __dirname + '/uploads/' + filename;
   res.sendFile(filePath);
 });
-
-
-/*app.post('/post', uploadMiddleware.single('file'), async (req, res) => {
-  try {
-    if (!req.file) {
-      return res.status(400).json('No file uploaded');
-    }
-
-    const { originalname, path } = req.file;
-    const parts = originalname.split('.');
-    const ext = parts[parts.length - 1];
-    const newPath = path + '.' + ext;
-    fs.renameSync(path, newPath);
-
-    const { token } = req.cookies;
-    jwt.verify(token, secret, {}, async (err, info) => {
-      if (err) {
-        return res.status(401).json('Invalid token');
-      }
-
-      const { title, summary, content } = req.body;
-      const postDoc = await Post.create({
-        title,
-        summary,
-        content,
-        cover: newPath,
-        author: info.id,
-      });
-
-      res.json(postDoc);
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json('Internal server error');
-  }
-});*/
 
 
 app.put('/post',uploadMiddleware.single('file'), async (req,res) => {

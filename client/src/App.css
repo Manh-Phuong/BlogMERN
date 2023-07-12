@@ -75,11 +75,6 @@ div.post p.summary {
   line-height: 1.8rem;
 }
 
-form.login,
-form.register {
-  max-width: 400px;
-  margin: 0 auto;
-}
 input {
   display: block;
   margin-bottom: 5px;
@@ -93,9 +88,10 @@ button {
   cursor: pointer;
   width: 100%;
   display: block;
-  background-color: #555;
-  border: 0;
-  color: #fff;
+  background-color: #ffffff;
+  border: 1px solid rgb(254, 44, 85);
+  color: rgb(254, 44, 85);
+  font-weight: 600;
   border-radius: 5px;
   padding: 7px 0;
 }
@@ -176,6 +172,7 @@ a svg {
   text-align: center;
   font-weight: 600;
   margin: 20px 0 0 0;
+  font-size: 18px;
 }
 
 /* add */
@@ -208,11 +205,6 @@ a svg {
     rgb(209, 213, 219) 0px 0px 0px 1px inset;
 }
 
-.PostPage-comment {
-  margin-top: 100px;
-  height: 300px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
 
 .go-top-button {
   position: fixed;
@@ -245,4 +237,133 @@ a svg {
 .go-top-button.show {
   opacity: 1;
   visibility: visible;
+}
+
+.PostPage-comment {
+  margin-top: 100px;
+  min-height: 300px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 20px;
+  margin-bottom: 60px;
+}
+
+
+.PostPage-comment-element {
+  min-height: 60px;
+  padding: 6px;
+  border-radius: 6px;
+  background-color: #f0f2f5;
+  margin: 6px 0;
+  box-sizing: border-box;
+}
+
+.PostPage-comment-username {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px 10px 20px;
+}
+
+.PostPage-comment-content {
+  padding: 0 60px 0 20px;
+}
+
+.PostPage-comment-right {
+  display: flex;
+  align-items: center;
+}
+
+.PostPage-comment-time {
+  font-size: 12px;
+  margin-right: 20px;
+  color: #65676b;
+}
+
+.PostPage-comment-icon {
+  width: 24px;
+  height: 24px;
+  max-width: 24px;
+  min-height: 24px;
+  color: #65676b;
+  cursor: pointer;
+}
+
+.Header-Login {
+  border-radius: 4px;
+  border: none;
+  color: rgb(255, 255, 255);
+  background-color: rgb(254, 44, 85);
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 8px;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+  margin-left: 16px;
+  min-width: 100px;
+}
+
+.Header-Register {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 6px 8px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
+}
+
+.LoginPage-form-wrap {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 30px 60px 30px 60px;
+  box-sizing: border-box;
+  margin: 0 160px;
+}
+
+.LoginPage-form input {
+  font-size: 16px;
+  font-weight: 600;
+  border-color: rgb(241, 241, 241);
+}
+
+.LoginPage-form button {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.LoginPage-form input:focus-within {
+  outline: 1px solid rgb(127, 124, 125);
+  border-color: transparent;
+}
+
+
+.RegisterPage-form-wrap {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 30px 60px 60px 60px;
+  box-sizing: border-box;
+  margin: 0 160px;
+}
+
+.RegisterPage-form input {
+  font-size: 16px;
+  font-weight: 600;
+  border-color: rgb(241, 241, 241);
+}
+
+.RegisterPage-form button {
+  font-size: 16px;
+  font-weight: 600;
+  border-color: rgb(254, 44, 85);
+  background-color: rgb(254, 44, 85);
+  color: white;
+}
+
+.RegisterPage-form input:focus-within {
+  outline: 1px solid rgb(127, 124, 125);
+  border-color: transparent;
 }
